@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import ProductCard from './components/ProductCard';
+import Pagination from './components/Pagination';
 import { PAGE_SIZE } from './utils/constants';
 
 const App = () => {
@@ -39,31 +40,11 @@ const App = () => {
           <ProductCard key={p.id} title={p.title} image={p.thumbnail} />
         ))}
       </div>
-      <div className='pagination-container'>
-        <button
-          disabled={currentPage === 0}
-          onClick={() => setCurrentPage((prev) => prev - 1)}
-          className='page-number'
-        >
-          ◀️
-        </button>
-        {[...Array(noOfPages).keys()].map((n) => (
-          <button
-            key={n}
-            className={'page-number ' + (currentPage === n && 'active')}
-            onClick={() => setCurrentPage(n)}
-          >
-            {n}
-          </button>
-        ))}
-        <button
-          disabled={currentPage === noOfPages - 1}
-          onClick={() => setCurrentPage((prev) => prev + 1)}
-          className='page-number'
-        >
-          ▶️
-        </button>
-      </div>
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        noOfPages={noOfPages}
+      />
     </div>
   );
 };
